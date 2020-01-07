@@ -1,13 +1,15 @@
+package com.microkatas;
+
 class ExtractInterfaceFromImplementation {
 
     static class Animal {
-        public String getSound() {
+        String getSound() {
             return "Mooo";
         }
     }
 
     static class Vehicle {
-        public int getWheels() {
+        int getWheels() {
             return 2;
         }
     }

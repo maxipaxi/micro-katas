@@ -1,3 +1,5 @@
+package com.microkatas;
+
 class PushCodeIntoClass {
 
     static class Item {

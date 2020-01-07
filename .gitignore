@@ -1,9 +1,13 @@
-target
-**/*.iml
-.idea
-**/__pycache__
-**/*.pyc
-.cache
-out/
-build/
-.gradle/
+.idea/
+*.iml
+target/
+
+.classpath
+.project
+bin/
+.settings/
+
+# Gradle
+.gradle
+/build/
+

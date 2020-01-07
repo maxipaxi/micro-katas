@@ -1,3 +1,5 @@
+package com.microkatas;
+
 class IntroduceStrategyPattern {
 
     static final int MINIMUM = 1;

@@ -1,3 +1,5 @@
+package com.microkatas;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +10,7 @@ public class SpecializeMethodTests {
 
     @Test
     public void newestElement_ArrayList_3() {
-        var input = new ArrayList() {{
+        var input = new ArrayList<Float>() {{
             add(1f);
             add(-2f);
             add(3f);
@@ -19,7 +21,7 @@ public class SpecializeMethodTests {
 
     @Test
     public void newestElement_Stack_3() {
-        var input = new Stack() {{
+        var input = new Stack<Float>() {{
             push(1f);
             push(-2f);
             push(3f);

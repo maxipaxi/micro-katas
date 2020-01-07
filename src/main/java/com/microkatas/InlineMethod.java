@@ -1,3 +1,5 @@
+package com.microkatas;
+
 class InlineMethod {
 
     private static float[] makeArray(float a, float b) {

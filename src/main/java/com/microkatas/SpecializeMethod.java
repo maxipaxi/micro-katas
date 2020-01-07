@@ -1,3 +1,5 @@
+package com.microkatas;
+
 class SpecializeMethod {
 
     static <T> T newestElement(Iterable<T> coll) {

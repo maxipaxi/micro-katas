@@ -1,3 +1,5 @@
+package com.microkatas;
+
 class ExtractMethod {
 
     static float[] subtractMinimum(float[] ar) {
@@ -21,7 +23,7 @@ class ExtractMethod {
             return ar;
         }
         // Find sum
-        var sum = 0;
+        var sum = 0f;
         for (float f : ar) {
             sum += f;
         }

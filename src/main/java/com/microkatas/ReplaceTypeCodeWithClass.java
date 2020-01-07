@@ -1,3 +1,5 @@
+package com.microkatas;
+
 class ReplaceTypeCodeWithClass {
 
     enum Size {
