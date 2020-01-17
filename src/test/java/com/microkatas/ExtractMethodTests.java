@@ -25,15 +25,23 @@ public class ExtractMethodTests {
             var input = new float[]{};
             var output = ExtractMethod.subtractMinimum(input);
             Assertions.assertArrayEquals(input, output);
+            try {
+                Thread.sleep(3000);
+            } catch (Exception e) {
+            }
         }
 
         @ParameterizedTest
         @Tag("Boundary")
-        @ValueSource(floats = {-Float.MAX_VALUE, 0, -3.4f, 15.2f, Float.MAX_VALUE})
+        @ValueSource(floats = {Float.MIN_VALUE, 0, -3.4f, 15.2f, Float.MAX_VALUE})
         public void an_array_with_a_single_element_to_go_to_0(float value) {
             var input = new float[]{value};
             var output = ExtractMethod.subtractMinimum(input);
             Assertions.assertArrayEquals(new float[]{0f}, output);
+            try {
+                Thread.sleep(3000);
+            } catch (Exception e) {
+            }
         }
 
         @Test
@@ -43,6 +51,10 @@ public class ExtractMethodTests {
             var output = ExtractMethod.subtractMinimum(input);
             Assertions.assertEquals(input.length, output.length);
             Assertions.assertTrue(hasZero(output), TestUtils.printArray(input));
+            try {
+                Thread.sleep(3000);
+            } catch (Exception e) {
+            }
         }
     }
 
@@ -66,7 +78,7 @@ public class ExtractMethodTests {
 
         @ParameterizedTest
         @Tag("Boundary")
-        @ValueSource(floats = {-Float.MAX_VALUE, 0, -3.4f, 15.2f, Float.MAX_VALUE})
+        @ValueSource(floats = {Float.MIN_VALUE, 0, -3.4f, 15.2f, Float.MAX_VALUE})
         public void an_array_with_a_single_element_to_go_to_0(float value) {
             var input = new float[]{value};
             var output = ExtractMethod.subtractAverage(input);
@@ -83,50 +95,39 @@ public class ExtractMethodTests {
         }
     }
 
-    static class normalizeHistogram_causes {
-        private static float minimum(float[] ar) {
-            var min = Float.POSITIVE_INFINITY;
-            for (float f : ar) {
-                if (min > f) {
-                    min = f;
-                }
-            }
-            return min;
-        }
-
-        private static float maximum(float[] ar) {
-            var max = Float.NEGATIVE_INFINITY;
-            for (float f : ar) {
-                if (max < f) {
-                    max = f;
-                }
-            }
-            return max;
-        }
-
-        @Test
-        public void an_empty_array_to_remain_empty() {
-            var input = new float[]{};
-            var output = ExtractMethod.normalizeHistogram(input);
-            Assertions.assertArrayEquals(input, output);
-        }
-
-        @ParameterizedTest
-        @Tag("Boundary")
-        @ValueSource(floats = {-Float.MAX_VALUE, 0, -3.4f, 15.2f, Float.MAX_VALUE})
-        public void an_array_with_a_single_element_remains_unchanged(float value) {
-            var input = new float[]{value};
-            var output = ExtractMethod.normalizeHistogram(input);
-            Assertions.assertArrayEquals(new float[]{value}, output);
-        }
-
-        @Test
-        @Tag("Theorem")
-        public void an_array_to_be_between_0_and_1() {
-            var input = TestUtils.randomFloatArray();
-            var output = ExtractMethod.normalizeHistogram(input);
-            Assertions.assertEquals(0f, minimum(output), TestUtils.printArray(output));
-            Assertions.assertEquals(1f, maximum(output), TestUtils.printArray(output));
-        }
+    @Test
+    public void normalizeHistogram_empty_stillEmpty() {
+        var input = new float[]{};
+        var output = ExtractMethod.normalizeHistogram(input);
+        Assertions.assertArrayEquals(input, output);
     }
+
+    @Test
+    public void normalizeHistogram_oneElement_zero() {
+        var input = new float[]{1f};
+        var output = ExtractMethod.normalizeHistogram(input);
+        Assertions.assertArrayEquals(new float[]{1f}, output);
+    }
+
+    @Test
+    public void normalizeHistogram_oneElement_zero2() {
+        var input = new float[]{-2f};
+        var output = ExtractMethod.normalizeHistogram(input);
+        Assertions.assertArrayEquals(new float[]{-2f}, output);
+    }
+
+    @Test
+    public void normalizeHistogram_multipleElements_works() {
+        var input = new float[]{1f, 2f, 3f};
+        var output = ExtractMethod.normalizeHistogram(input);
+        Assertions.assertArrayEquals(new float[]{0f, 0.5f, 1f}, output);
+    }
+
+    @Test
+    public void normalizeHistogram_multipleElementsOneNegative_works() {
+        var input = new float[]{1f, -2f, 3f};
+        var output = ExtractMethod.normalizeHistogram(input);
+        Assertions.assertArrayEquals(new float[]{0.6f, 0f, 1f}, output);
+    }
+
 }
